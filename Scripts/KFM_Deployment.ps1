@@ -19,11 +19,9 @@
         
         Deployment Guidnace: https://docs.microsoft.com/en-us/onedrive/redirect-known-folders        
 #>
-
 #CODE STARTS HERE
 #--TODO: Put your Tenant ID here, similar to $GivenTenantID =  'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx'
 #--TODO: Put a designated location here for logs $OutputPath = 'example file path C:\...\Desktop\' + $env:USERNAME + "_" + $env:COMPUTERNAME + '.txt'
-
 
 $PolictyState3 = ''
 $PolictyState4 = ''
@@ -67,21 +65,21 @@ $DocumentsInOD = ($DocumentsPath -like $SpecificODPath)
 $PicturesInOD = ($PicturesPath -like $SpecificODPath)
 
 if(!$DesktopInOD){
-    foreach ($item in (Get-ChildItem $DesktopPath -recurse | Where {-not $_.PSIsContainer} | ForEach-Object {$_.FullName})) {
+    foreach ($item in (Get-ChildItem $DesktopPath -recurse | Where-Object {-not $_.PSIsContainer} | ForEach-Object {$_.FullName})) {
        $DesktopSize += (Get-Item $item).length
        $DesktopItems++
     }
 }
 
 if(!$DocumentsInOD){
-    foreach ($item in (Get-ChildItem $DocumentsPath -recurse | Where {-not $_.PSIsContainer} | ForEach-Object {$_.FullName})) {
+    foreach ($item in (Get-ChildItem $DocumentsPath -recurse | Where-Object {-not $_.PSIsContainer} | ForEach-Object {$_.FullName})) {
        $DocumentsSize += (Get-Item $item).length
        $DocumentsItems++
     }
 }
 
 if(!$PicturesInOD){
-    foreach ($item in (Get-ChildItem $PicturesPath -recurse | Where {-not $_.PSIsContainer} | ForEach-Object {$_.FullName})) {
+    foreach ($item in (Get-ChildItem $PicturesPath -recurse | Where-Object {-not $_.PSIsContainer} | ForEach-Object {$_.FullName})) {
        $PicturesSize += (Get-Item $item).length
        $PicturesItems++
     }
