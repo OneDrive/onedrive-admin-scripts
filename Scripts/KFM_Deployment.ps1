@@ -1,6 +1,7 @@
 <#       
     .DESCRIPTION
-        Script to enumerate OneDrive for Business Sites along with their data usage and date created. 
+        Script to gather KFM state that can help KFM planning and deployment.
+
         The sample scripts are not supported under any Microsoft standard support 
         program or service. The sample scripts are provided AS IS without warranty  
         of any kind. Microsoft further disclaims all implied warranties including,  
