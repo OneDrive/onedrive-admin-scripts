@@ -23,13 +23,13 @@
 #--TODO: Put your Tenant ID here, similar to $GivenTenantID =  'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx'
 #--TODO: Put a designated location here for logs $OutputPath = 'example file path C:\...\Desktop\' + $env:USERNAME + "_" + $env:COMPUTERNAME + '.txt'
 
-$PolictyState3 = ''
-$PolictyState4 = ''
+$PolicyState3 = ''
+$PolicyState4 = ''
 $KFMBlockOptInSet = 'False'
 $KFMBlockOptOutSet = 'False'
 $SpecificODPath = ''
-$TotalItems = 0
-$TotalSize = 0
+$TotalItemsNotInOneDrive = 0
+$TotalSizeNotInOneDrive = 0
 [Long]$DesktopSize = 0
 [Long]$DocumentsSize = 0
 [Long]$PicturesSize = 0
@@ -85,27 +85,27 @@ if(!$PicturesInOD){
     }
 }
 
-$TotalItems = $DesktopItems + $DocumentsItems + $PicturesItems
-$TotalSize = $DesktopSize + $DocumentsSize + $PicturesSize
+$TotalItemsNotInOneDrive = $DesktopItems + $DocumentsItems + $PicturesItems
+$TotalSizeNotInOneDrive = $DesktopSize + $DocumentsSize + $PicturesSize
 
-$PolictyState1 = Get-ItemPropertyValue -path HKLM:\SOFTWARE\Policies\Microsoft\OneDrive -name KFMOptInWithWizard
-$KFMOptInWithWizardSet = ($PolictyState1 -ne $null) -and ($PolictyState1 -eq $GivenTenantID)
+$PolicyState1 = Get-ItemPropertyValue -path HKLM:\SOFTWARE\Policies\Microsoft\OneDrive -name KFMOptInWithWizard
+$KFMOptInWithWizardSet = ($PolicyState1 -ne $null) -and ($PolicyState1 -eq $GivenTenantID)
 
-$PolictyState2 = Get-ItemPropertyValue -path HKLM:\SOFTWARE\Policies\Microsoft\OneDrive -name KFMSilentOptIn
-$KFMSilentOptInSet = $PolictyState2 -eq $GivenTenantID
+$PolicyState2 = Get-ItemPropertyValue -path HKLM:\SOFTWARE\Policies\Microsoft\OneDrive -name KFMSilentOptIn
+$KFMSilentOptInSet = $PolicyState2 -eq $GivenTenantID
 
 Try{
-$PolictyState3 = Get-ItemPropertyValue -path HKLM:\SOFTWARE\Policies\Microsoft\OneDrive -name KFMBlockOptIn
-$KFMBlockOptInSet = ($PolictyState3 -ne $null) -and ($PolictyState3 -eq 1)
+$PolicyState3 = Get-ItemPropertyValue -path HKLM:\SOFTWARE\Policies\Microsoft\OneDrive -name KFMBlockOptIn
+$KFMBlockOptInSet = ($PolicyState3 -ne $null) -and ($PolicyState3 -eq 1)
 }Catch{}
 
 Try{
-$PolictyState4 = Get-ItemPropertyValue -path HKLM:\SOFTWARE\Policies\Microsoft\OneDrive -name KFMBLockOptOut
-$KFMBlockOptOutSet = ($PolictyState4 -ne $null) -and ($PolictyState4 -eq 1)
+$PolicyState4 = Get-ItemPropertyValue -path HKLM:\SOFTWARE\Policies\Microsoft\OneDrive -name KFMBLockOptOut
+$KFMBlockOptOutSet = ($PolicyState4 -ne $null) -and ($PolicyState4 -eq 1)
 }Catch{}
 
-$PolictyState5 = Get-ItemPropertyValue -path HKLM:\SOFTWARE\Policies\Microsoft\OneDrive -name KFMSilentOptInWithNotification
-$SendNotificationWithSilent = $PolictyState5 -eq 1
+$PolicyState5 = Get-ItemPropertyValue -path HKLM:\SOFTWARE\Policies\Microsoft\OneDrive -name KFMSilentOptInWithNotification
+$SendNotificationWithSilent = $PolicyState5 -eq 1
 
 $ODVersion = Get-ItemPropertyValue -Path HKCU:\Software\Microsoft\OneDrive -Name Version
 
@@ -113,8 +113,8 @@ $ODVersion = Get-ItemPropertyValue -Path HKCU:\Software\Microsoft\OneDrive -Name
 
 Set-Content $OutputPath "$KFMGPOEligible | Device_is_KFM_GPO_eligible"
 if(!$DesktopInOD -or !$DocumentsInOD -or !$PicturesInOD){
-    Add-Content $OutputPath "$TotalItems | Total_items" 
-    Add-Content $OutputPath "$TotalSize | Total_size_bytes`n" 
+    Add-Content $OutputPath "$TotalItemsNotInOneDrive | Total_items_not_in_OneDrive" 
+    Add-Content $OutputPath "$TotalSizeNotInOneDrive | Total_size_bytes_not_in_OneDrive`n" 
 }
 Add-Content $OutputPath "$DesktopInOD | Desktop_is_in_OneDrive" 
 if(!$DesktopInOD){
