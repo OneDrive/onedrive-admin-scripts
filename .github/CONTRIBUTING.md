@@ -41,7 +41,7 @@ When you are submitting a new sample, it has to follow up below guidelines
 Here's a high level process for submitting new samples or updates to existing ones.
 
 1. Sign the Contributor License Agreement (see below)
-1. Fork this repository [SharePoint/onedrive-admin-scripts](https://github.com/OneDrive/onedrive-admin-scripts) to your GitHub account
+1. Fork this repository [OneDrive/onedrive-admin-scripts](https://github.com/OneDrive/onedrive-admin-scripts) to your GitHub account
 1. Create a new branch off the `master` branch for your fork for the contribution
 1. Include your changes to your branch
 1. Commit your changes using descriptive commit message * These are used to track changes on the repositories for monthly communications
