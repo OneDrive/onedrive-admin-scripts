@@ -17,7 +17,7 @@
         
         Author: Carter Green - cagreen@microsoft.com
         
-        Deployment Guidnace: https://docs.microsoft.com/en-us/onedrive/redirect-known-folders        
+        Deployment Guidance: https://docs.microsoft.com/en-us/onedrive/redirect-known-folders        
 #>
 #CODE STARTS HERE
 #--TODO: Put your Tenant ID here, similar to $GivenTenantID =  'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx'
