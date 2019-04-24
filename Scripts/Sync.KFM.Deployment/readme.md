@@ -63,4 +63,4 @@ False | KFM_Block_Opt_Out_Set
 
 19.064.0402.0001 | OneDrive Sync client version
 ~~~
-<img src="https://telemetry.sharepointpnp.com/onedrive-admin-scripts/scripts/my-script-folder-name" /> 
+<img src="https://telemetry.sharepointpnp.com/onedrive-admin-scripts/scripts/Sync.KFM.Deployment" /> 
