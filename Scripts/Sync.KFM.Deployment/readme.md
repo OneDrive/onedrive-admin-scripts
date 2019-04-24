@@ -1,4 +1,4 @@
-# Title of the Script (SEO friendly) #
+# Windows known folder move deployment #
 
 ## Summary ##
 
