@@ -32,7 +32,7 @@ When you are submitting a new sample, it has to follow up below guidelines
   * Updated the image src element according with repository name and folder information. If your sample is for example in samples folder and named as known-folder-move, src element should be updated as https://telemetry.sharepointpnp.com/onedrive-admin-scripts/script/known-folder-move
 
 * When you are submitting a new script, please name the sample solution folder accordingly
-  * Do not use words "sample", "scro[t" or "onedrive" in the folder or sample name - these are scripts for OneDrive management, so no reason to repeat that in the name
+  * Do not use words "sample", "script" or "onedrive" in the folder or sample name - these are scripts for OneDrive management, so no reason to repeat that in the name
   
 * Do not use period/dot in the folder name of the provided sample
 
