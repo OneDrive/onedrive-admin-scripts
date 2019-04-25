@@ -19,7 +19,7 @@ The execution of the script can be done via Intune or other management tools tha
 
 ### Prerequisites ###
 
-- if any
+- As the script modified regsitry values, you will need to be an administrator in the computer where it's executed.
 
 ### Solution ###
 
