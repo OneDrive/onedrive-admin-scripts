@@ -1,15 +1,17 @@
-# Windows known folder move deployment #
+# Windows Known Folder Move (KFM) deployment #
 
 ## Summary ##
 
 The script will create a txt file that shows 4 things:
 
-- KFM eligibility (for whatever device it was run on)
+- Know Folder Move (KFM) eligibility (for whatever device it was run on)
 - Payload detailes (number of items and size of content within known folders) 
 - KFM status (have the known folders been moved to OneDrive)
 - KFM GPO state (what GPOs have been set)
 
 The execution of the script can be done via Intune or other management tools that can execute a PowerShell script across Windows 10 devices.  A TenantID as well as an output path is required.  This level of detail will provide a better deployment of KFM.
+
+> More details around the Known Folder Move capability is available from the [official OneDrive documentation](https://docs.microsoft.com/en-us/onedrive/redirect-known-folders).
  
 ### Applies to ###
 
@@ -20,11 +22,13 @@ The execution of the script can be done via Intune or other management tools tha
 - if any
 
 ### Solution ###
+
 Solution | Author(s)
 ---------|----------
 KFM Deployment scipt | Carter Green (Microsoft)
 
 ### Version history ###
+
 Version  | Date | Comments
 ---------| -----| --------
 1.0  | April 24th 2019 | Initial release
@@ -63,4 +67,5 @@ False | KFM_Block_Opt_Out_Set
 
 19.064.0402.0001 | OneDrive Sync client version
 ~~~
+
 <img src="https://telemetry.sharepointpnp.com/onedrive-admin-scripts/scripts/Sync.KFM.Deployment" /> 
