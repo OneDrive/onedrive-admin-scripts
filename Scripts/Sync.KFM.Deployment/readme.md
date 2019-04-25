@@ -5,7 +5,7 @@
 The script will create a txt file that shows 4 things:
 
 - Know Folder Move (KFM) eligibility (for whatever device it was run on)
-- Payload detailes (number of items and size of content within known folders) 
+- Payload details (number of items and size of content within known folders) 
 - KFM status (have the known folders been moved to OneDrive)
 - KFM GPO state (what GPOs have been set)
 
