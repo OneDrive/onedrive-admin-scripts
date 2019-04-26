@@ -19,13 +19,13 @@ The execution of the script can be done via Intune or other management tools tha
 
 ### Prerequisites ###
 
-- As the script modified regsitry values, you will need to be an administrator in the computer where it's executed.
+- As the script reads registry values, you will need to be an administrator in the devices where it's executed.
 
 ### Solution ###
 
 Solution | Author(s)
 ---------|----------
-KFM Deployment scipt | Carter Green (Microsoft)
+KFM Deployment script | Carter Green (Microsoft)
 
 ### Version history ###
 
