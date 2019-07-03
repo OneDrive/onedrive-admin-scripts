@@ -1,4 +1,4 @@
-# Title of the Script (SEO friendly) #
+# OneDrive Sync Client PowerShell Module #
 
 ## Summary ##
 
