@@ -1,5 +1,5 @@
-# OneDrive Policy Module
-#https://docs.microsoft.com/en-us/onedrive/use-group-policy#list-of-policies
+# OneDrive Client Group Policy (GPO) configuration module
+# https://docs.microsoft.com/en-us/onedrive/use-group-policy#list-of-policies
 
 #region RegistryKeys
 
