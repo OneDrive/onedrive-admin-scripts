@@ -1,4 +1,4 @@
-# Title of the Script (SEO friendly) #
+# OneDrive Client Group Policy (GPO) configuration #
 
 ## Summary ##
 
