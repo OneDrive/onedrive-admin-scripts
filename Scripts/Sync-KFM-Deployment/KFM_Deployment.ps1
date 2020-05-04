@@ -21,7 +21,8 @@
 #>
 #CODE STARTS HERE
 #--TODO: Put your Tenant ID here, similar to $GivenTenantID =  'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx'
-#--TODO: Put a designated location here for logs $OutputPath = 'example file path C:\...\Desktop\' + $env:USERNAME + "_" + $env:COMPUTERNAME + '.txt'
+
+$OutputPath = [Environment]::GetFolderPath("Desktop") + "\" + $env:USERNAME + "_" + $env:COMPUTERNAME + '.txt'
 
 $PolicyState3 = ''
 $PolicyState4 = ''
