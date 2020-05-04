@@ -93,24 +93,45 @@ $TotalItemsNotInOneDrive = $DesktopItems + $DocumentsItems + $PicturesItems
 $TotalSizeNotInOneDrive = $DesktopSize + $DocumentsSize + $PicturesSize
 
 # Policy state checks
-$PolicyState1 = Get-ItemPropertyValue -path HKLM:\SOFTWARE\Policies\Microsoft\OneDrive -name KFMOptInWithWizard
-$KFMOptInWithWizardSet = ($null -ne $PolicyState1 ) -and ($PolicyState1 -eq $GivenTenantID)
+try {
+    $PolicyState1 = Get-ItemPropertyValue -path HKLM:\SOFTWARE\Policies\Microsoft\OneDrive -name KFMOptInWithWizard
+    $KFMOptInWithWizardSet = ($null -ne $PolicyState1 ) -and ($PolicyState1 -eq $GivenTenantID)        
+}
+catch {
+    
+}
 
-$PolicyState2 = Get-ItemPropertyValue -path HKLM:\SOFTWARE\Policies\Microsoft\OneDrive -name KFMSilentOptIn
-$KFMSilentOptInSet = $PolicyState2 -eq $GivenTenantID
+try {
+    $PolicyState2 = Get-ItemPropertyValue -path HKLM:\SOFTWARE\Policies\Microsoft\OneDrive -name KFMSilentOptIn
+    $KFMSilentOptInSet = $PolicyState2 -eq $GivenTenantID        
+}
+catch {
+    
+}
 
-Try{
-$PolicyState3 = Get-ItemPropertyValue -path HKLM:\SOFTWARE\Policies\Microsoft\OneDrive -name KFMBlockOptIn
-$KFMBlockOptInSet = ($null -ne $PolicyState3) -and ($PolicyState3 -eq 1)
-}Catch{}
+try {
+    $PolicyState3 = Get-ItemPropertyValue -path HKLM:\SOFTWARE\Policies\Microsoft\OneDrive -name KFMBlockOptIn
+    $KFMBlockOptInSet = ($null -ne $PolicyState3) -and ($PolicyState3 -eq 1)    
+}
+catch {
+    
+}
 
-Try{
-$PolicyState4 = Get-ItemPropertyValue -path HKLM:\SOFTWARE\Policies\Microsoft\OneDrive -name KFMBLockOptOut
-$KFMBlockOptOutSet = ($null -ne $PolicyState4) -and ($PolicyState4 -eq 1)
-}Catch{}
+try {
+    $PolicyState4 = Get-ItemPropertyValue -path HKLM:\SOFTWARE\Policies\Microsoft\OneDrive -name KFMBLockOptOut
+    $KFMBlockOptOutSet = ($null -ne $PolicyState4) -and ($PolicyState4 -eq 1)    
+}
+catch {
+    
+}
 
-$PolicyState5 = Get-ItemPropertyValue -path HKLM:\SOFTWARE\Policies\Microsoft\OneDrive -name KFMSilentOptInWithNotification
-$SendNotificationWithSilent = $PolicyState5 -eq 1
+try {
+    $PolicyState5 = Get-ItemPropertyValue -path HKLM:\SOFTWARE\Policies\Microsoft\OneDrive -name KFMSilentOptInWithNotification
+    $SendNotificationWithSilent = $PolicyState5 -eq 1    
+}
+catch {
+    
+}
 
 # Version details
 $ODVersion = Get-ItemPropertyValue -Path HKCU:\Software\Microsoft\OneDrive -Name Version
