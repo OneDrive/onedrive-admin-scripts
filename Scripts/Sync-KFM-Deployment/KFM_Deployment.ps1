@@ -47,6 +47,8 @@ $ODPath = Get-ChildItem -Path HKCU:\Software\Microsoft\OneDrive\Accounts -name -
     'HKCU:\Software\Microsoft\OneDrive\Accounts\' + $_
 }
 
+# Review each OneDrive Path to determine if equal to the given Microsoft tenant ID
+# If matching then determine the Known Folder Scan State and break to continue
 foreach ($path in $ODPath){
     $ConfiguredTenantID = Get-ItemPropertyValue -path $path -name ConfiguredTenantID
     If ($GivenTenantID -eq $ConfiguredTenantID){
@@ -56,12 +58,16 @@ foreach ($path in $ODPath){
     }
 }
 
+# LastMigrationScanResult=DWORD:40 **appears** to be unsuccesful
+# LastMigrationScanResult=DWORD:50 **appears** to be another unsucceful state
 $KFMGPOEligible = (($KFMScanState -ne 40) -and ($KFMScanState -ne 50))
 
+# Determine state of the local user path to the ODPath identified earlier
 $DesktopInOD = ($DesktopPath -like $SpecificODPath)
 $DocumentsInOD = ($DocumentsPath -like $SpecificODPath)
 $PicturesInOD = ($PicturesPath -like $SpecificODPath)
 
+# If KFM is not in place count the items at risk
 if(!$DesktopInOD){
     foreach ($item in (Get-ChildItem $DesktopPath -recurse | Where-Object {-not $_.PSIsContainer} | ForEach-Object {$_.FullName})) {
        $DesktopSize += (Get-Item $item).length
@@ -86,6 +92,7 @@ if(!$PicturesInOD){
 $TotalItemsNotInOneDrive = $DesktopItems + $DocumentsItems + $PicturesItems
 $TotalSizeNotInOneDrive = $DesktopSize + $DocumentsSize + $PicturesSize
 
+# Policy state checks
 $PolicyState1 = Get-ItemPropertyValue -path HKLM:\SOFTWARE\Policies\Microsoft\OneDrive -name KFMOptInWithWizard
 $KFMOptInWithWizardSet = ($null -ne $PolicyState1 ) -and ($PolicyState1 -eq $GivenTenantID)
 
@@ -105,10 +112,10 @@ $KFMBlockOptOutSet = ($null -ne $PolicyState4) -and ($PolicyState4 -eq 1)
 $PolicyState5 = Get-ItemPropertyValue -path HKLM:\SOFTWARE\Policies\Microsoft\OneDrive -name KFMSilentOptInWithNotification
 $SendNotificationWithSilent = $PolicyState5 -eq 1
 
+# Version details
 $ODVersion = Get-ItemPropertyValue -Path HKCU:\Software\Microsoft\OneDrive -Name Version
 
-
-
+# Assemble the data to be outputted
 Set-Content $OutputPath "$KFMGPOEligible | Device_is_KFM_GPO_eligible"
 if(!$DesktopInOD -or !$DocumentsInOD -or !$PicturesInOD){
     Add-Content $OutputPath "$TotalItemsNotInOneDrive | Total_items_not_in_OneDrive" 
@@ -135,5 +142,3 @@ Add-Content $OutputPath "$SendNotificationWithSilent | KFM_Silent_With_Notificat
 Add-Content $OutputPath "$KFMBlockOptInSet | KFM_Block_Opt_In_Set"
 Add-Content $OutputPath "$KFMBlockOptOutSet | KFM_Block_Opt_Out_Set `n"
 Add-Content $OutputPath "$ODVersion | OneDrive Sync client version"
-
-Start-Process $OutputPath
