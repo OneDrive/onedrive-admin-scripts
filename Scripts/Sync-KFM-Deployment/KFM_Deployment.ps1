@@ -90,19 +90,19 @@ $TotalItemsNotInOneDrive = $DesktopItems + $DocumentsItems + $PicturesItems
 $TotalSizeNotInOneDrive = $DesktopSize + $DocumentsSize + $PicturesSize
 
 $PolicyState1 = Get-ItemPropertyValue -path HKLM:\SOFTWARE\Policies\Microsoft\OneDrive -name KFMOptInWithWizard
-$KFMOptInWithWizardSet = ($PolicyState1 -ne $null) -and ($PolicyState1 -eq $GivenTenantID)
+$KFMOptInWithWizardSet = ($null -ne $PolicyState1 ) -and ($PolicyState1 -eq $GivenTenantID)
 
 $PolicyState2 = Get-ItemPropertyValue -path HKLM:\SOFTWARE\Policies\Microsoft\OneDrive -name KFMSilentOptIn
 $KFMSilentOptInSet = $PolicyState2 -eq $GivenTenantID
 
 Try{
 $PolicyState3 = Get-ItemPropertyValue -path HKLM:\SOFTWARE\Policies\Microsoft\OneDrive -name KFMBlockOptIn
-$KFMBlockOptInSet = ($PolicyState3 -ne $null) -and ($PolicyState3 -eq 1)
+$KFMBlockOptInSet = ($null -ne $PolicyState3) -and ($PolicyState3 -eq 1)
 }Catch{}
 
 Try{
 $PolicyState4 = Get-ItemPropertyValue -path HKLM:\SOFTWARE\Policies\Microsoft\OneDrive -name KFMBLockOptOut
-$KFMBlockOptOutSet = ($PolicyState4 -ne $null) -and ($PolicyState4 -eq 1)
+$KFMBlockOptOutSet = ($null -ne $PolicyState4) -and ($PolicyState4 -eq 1)
 }Catch{}
 
 $PolicyState5 = Get-ItemPropertyValue -path HKLM:\SOFTWARE\Policies\Microsoft\OneDrive -name KFMSilentOptInWithNotification
