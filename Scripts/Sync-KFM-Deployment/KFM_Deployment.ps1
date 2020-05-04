@@ -42,12 +42,9 @@ $DesktopPath = [environment]::GetFolderPath("Desktop")
 $DocumentsPath = [environment]::GetFolderPath("MyDocuments")
 $PicturesPath = [environment]::GetFolderPath("MyPictures")
 
-$ODAccounts = Get-ChildItem -Path HKCU:\Software\Microsoft\OneDrive\Accounts -name
-
-$ODPath = foreach ($account in $ODAccounts){
-    If($account -notlike 'Personal'){
-        'HKCU:\Software\Microsoft\OneDrive\Accounts\' + $account
-    }
+# List of OneDrive accounts based upon name excluding accounts with the name 'Personal'
+$ODPath = Get-ChildItem -Path HKCU:\Software\Microsoft\OneDrive\Accounts -name -Exclude 'Personal' | ForEach-Object {
+    'HKCU:\Software\Microsoft\OneDrive\Accounts\' + $_
 }
 
 foreach ($path in $ODPath){
@@ -138,3 +135,5 @@ Add-Content $OutputPath "$SendNotificationWithSilent | KFM_Silent_With_Notificat
 Add-Content $OutputPath "$KFMBlockOptInSet | KFM_Block_Opt_In_Set"
 Add-Content $OutputPath "$KFMBlockOptOutSet | KFM_Block_Opt_Out_Set `n"
 Add-Content $OutputPath "$ODVersion | OneDrive Sync client version"
+
+Start-Process $OutputPath
