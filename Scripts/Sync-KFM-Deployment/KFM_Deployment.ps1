@@ -20,8 +20,20 @@
         Deployment Guidance: https://docs.microsoft.com/en-us/onedrive/redirect-known-folders        
 #>
 #CODE STARTS HERE
-#--TODO: Put your Tenant ID here, similar to $GivenTenantID =  'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx'
-#--TODO: Put a designated location here for logs $OutputPath = 'example file path C:\...\Desktop\' + $env:USERNAME + "_" + $env:COMPUTERNAME + '.txt'
+
+
+#TenantID is now a required parameter. Use -GivenTenantID to set TenantID, e.g. "-GivenTenantID =  'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx'"
+#OutputPath is now a required parameter. Use -OutputPath to designate location for logs, e.g. "-OutputPath = 'C:\...\Desktop\' + $env:USERNAME + "_" + $env:COMPUTERNAME + '.txt'"
+#Parameters will now be asked for upon execution of the script if not provided in the command line that runs the script.
+param(
+    [parameter(Mandatory=$true, HelpMessage="Specify the tenant ID, e.g. xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx")]
+    [ValidateNotNullOrEmpty()]
+    [string]$GivenTenantID,
+
+    [parameter(Mandatory=$true, HelpMessage='Specify the output path for log files. Example file path: C:\...\Desktop\ + $env:USERNAME + "_" + $env:COMPUTERNAME + ".txt" ')]
+    [ValidateNotNullOrEmpty()]
+    [string]$OutputPath
+)
 
 $PolicyState3 = ''
 $PolicyState4 = ''
