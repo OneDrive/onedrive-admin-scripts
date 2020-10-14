@@ -1,0 +1,21 @@
+$desktop_false = {}.Invoke()
+$documents_false = {}.Invoke()
+$pictures_false = {}.Invoke()
+Get-ChildItem "path to location of output files" -Filter *.txt |
+ForEach-Object {
+  $filename = $_.FullName
+  Get-Content $_.FullName | ForEach-Object {
+    if ($_ -match "Desktop_is_in_OneDrive" -and $_ -match "False") {
+      $desktop_false.add($filename)
+    }
+    if ($_ -match "Documents_is_in_OneDrive" -and $_ -match "False") {
+      $documents_false.add($filename)
+    }
+    if ($_ -match "Pictures_is_in_OneDrive" -and $_ -match "False") {
+      $pictures_false.add($filename)
+    }
+  }
+}
+Write-Output "Desktop folder not in OD4B:" $desktop_false
+Write-Output "Documents folder not in OD4B:" $documents_false
+Write-Output "Pictures folder not in OD4B:" $pictures_false
